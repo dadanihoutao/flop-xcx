@@ -1,0 +1,60 @@
+.card-module {
+    padding: 20rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    transform: translate3d(0, 0, 0);
+}
+
+.card-module .card {
+    width: 200rpx;
+    height: 200rpx;
+    line-height: 200rpx;
+    text-align: center;
+    color: #fff;
+    margin: 11rpx;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-module .card .card-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all .5s ease-in-out;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+}
+.card-module .card image {
+    width: 100%;
+    height: 100%;
+}
+
+.card-module .card .front {
+    /* background-color: red; */
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+.card-module .card .back {
+    /* background-color: #009fff; */
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+.card-module .card.change .front {
+    z-index: 1;
+    transform: rotateY(180deg);
+}
+
+.card-module .card.change .back {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+.card-module .card.change .opacity {
+    opacity: 0.5;
+}

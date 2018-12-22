@@ -1,0 +1,12 @@
+<view class="wrap">
+    <view class="card-module">
+        <view class="card {{ item.showClass ? 'change' : ''}} " wx:for="{{cardData}}" wx:for-index="index" wx:for-item="item"
+            wx:key="{{ item.id }}" animation="{{item.animationData}}" bindtap="handleCurClick" data-id="{{ item.id }}" style="widht: {{carWidth}}; height: {{carWidth}}">
+            <view class="front card-item"><image src="{{item.front}}"></image></view>
+            <view class="back card-item {{ item.opacity ? 'opacity' : ''}}"><image src="{{item.back}}"></image></view>
+        </view>
+    </view>
+    <view class="num">你有抽奖机会{{ number }}次</view>
+    <button bindtap="allChange">全部翻转</button>
+    <button bindtap="allMove">洗牌</button>
+</view>
