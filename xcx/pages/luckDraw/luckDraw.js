@@ -90,15 +90,9 @@ Page({
         ],
     },
     onLoad() {
-        const total = 9 // 总数
-        const lineTotal = 3 // 单行数
-        const { cardData } = this.data;
         let carWidth = 0;
-        cardData.map((item, index) => {
-            let x = index % lineTotal
-            let y = parseInt(index / lineTotal)
-            item.twoArry = { x, y }
-        })
+        const { cardData } = this.data;
+        this.addPosition(cardData); // 数组添加移动坐标位置
         wx.getSystemInfo({
             success(res) {
                 carWidth = parseInt((res.windowWidth - 40) / 3);
@@ -106,10 +100,21 @@ Page({
             }
         })
         this.setData({
-            cardData,
             carWidth
         })          
     },
+
+    // 数组添加移动坐标值
+    addPosition(cardData){
+        const lineTotal = 3 // 单行数
+        cardData.map((item, index) => {
+            let x = index % lineTotal
+            let y = parseInt(index / lineTotal)
+            item.twoArry = { x, y }
+        })
+        this.setData({cardData})
+    },
+
     //全部翻转
     allChange() {
         const { cardData } = this.data
@@ -125,10 +130,13 @@ Page({
 
     //洗牌
     allMove() {
-        const { carWidth } = this.data;
+        const { carWidth, cardData } = this.data;
         // 110 是卡牌宽度加边距
         this.shuffle(carWidth) //移动到中心,  110 是牌的宽度，加上外边距边框
         let timer = setTimeout(() => {
+            // 每次移动到中心位置以后，先打乱数组顺序，给数组每一项重新添加移动坐标值，setData({cardData}) 然后在散开
+            cardData.sort(this.randomsort);
+            this.addPosition(cardData)
             clearTimeout(timer)
             this.shuffle(0) // 间隔1秒钟，移动到原来位置
         }, 1000)
@@ -157,6 +165,11 @@ Page({
         })
     },
 
+    // 打乱数组顺序
+    randomsort(a, b) {
+        return Math.random()>.5 ? -1 : 1;
+        //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+    },
 
     // 处理单个点击翻转
     handleCurClick(event) {
@@ -196,6 +209,9 @@ Page({
                         // 这里去请求接口重新获取数据，获取成功以后调用 this.shuffle(0) 这里用
                         setTimeout(() => {
                             wx.hideLoading()
+                            // 每次移动到中心位置以后，先打乱数组顺序，给数组每一项重新添加移动坐标值，setData({cardData}) 然后在散开
+                            cardData.sort(_this.randomsort);
+                            _this.addPosition(cardData)
                             _this.shuffle(0)
                         }, 3000)
                     } else if (res.cancel) {
