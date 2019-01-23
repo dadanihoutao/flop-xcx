@@ -14,6 +14,7 @@ Page({
                 showClass: false,  // 控制翻转
                 opacity: false, // 控制翻转过来以后的 opacity
                 money: 1,
+                disabled: false,  // disabled 属性，控制手速点击过快，导致多个牌被翻开, 默认为false 可以点击
             },
             {
                 animationData: {},
@@ -23,6 +24,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 2,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -32,6 +34,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 3,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -41,6 +44,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 4,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -50,6 +54,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 5,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -59,6 +64,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 6,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -68,6 +74,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 7,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -77,6 +84,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 8,
+                disabled: false,
             },
             {
                 animationData: {},
@@ -86,6 +94,7 @@ Page({
                 showClass: false,
                 opacity: false,
                 money: 9,
+                disabled: false,
             },
         ],
     },
@@ -174,9 +183,16 @@ Page({
     // 处理单个点击翻转
     handleCurClick(event) {
         let curId = event.currentTarget.dataset.id;
+        // 每次点击时获取被点击拍的disable 属性，
+        let disabled = event.currentTarget.dataset.disabled;
+        //如果为true 就返回不继续向下执行
+        if(disabled){
+           return; 
+        }
         let { cardData, number, carWidth } = this.data;
         let money = '';
         cardData.forEach(item => {
+            item.disabled = true;  // 点击一张拍以后，把所有的牌的disabled 属性改成true ，
             if (item.id === curId) {
                 item.showClass = true;
                 money = item.money;

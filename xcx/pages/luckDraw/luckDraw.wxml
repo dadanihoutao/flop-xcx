@@ -1,7 +1,7 @@
 <view class="wrap">
     <view class="card-module">
-        <view class="card {{ item.showClass ? 'change' : ''}} " wx:for="{{cardData}}" wx:for-index="index" wx:for-item="item"
-            wx:key="{{ item.id }}" animation="{{item.animationData}}" bindtap="handleCurClick" data-id="{{ item.id }}" style="widht: {{carWidth}}; height: {{carWidth}}">
+        <view class="card {{ item.showClass ? 'change' : ''}} "  wx:for="{{cardData}}" wx:for-index="index" wx:for-item="item"
+            wx:key="{{ item.id }}" animation="{{item.animationData}}" bindtap="handleCurClick" data-id="{{ item.id }}" data-disabled="{{ item.disabled }}" style="widht: {{carWidth}}; height: {{carWidth}}">
             <view class="front card-item"><image src="{{item.front}}"></image></view>
             <view class="back card-item {{ item.opacity ? 'opacity' : ''}}"><image src="{{item.back}}"></image></view>
         </view>
