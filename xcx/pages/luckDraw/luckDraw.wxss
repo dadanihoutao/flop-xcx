@@ -37,23 +37,27 @@
 .card-module .card .front {
     /* background-color: red; */
     transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
     z-index: 2;
 }
 
 .card-module .card .back {
     /* background-color: #009fff; */
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
     z-index: 1;
 }
 
 .card-module .card.change .front {
     z-index: 1;
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .card-module .card.change .back {
     z-index: 2;
     transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
 }
 .card-module .card.change .opacity {
     opacity: 0.5;
