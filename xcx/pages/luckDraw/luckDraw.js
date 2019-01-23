@@ -113,13 +113,14 @@ Page({
         })          
     },
 
-    // 数组添加移动坐标值
+    // 数组添加移动坐标值 并且把所有的disabled 状态还原会false 
     addPosition(cardData){
         const lineTotal = 3 // 单行数
         cardData.map((item, index) => {
             let x = index % lineTotal
             let y = parseInt(index / lineTotal)
             item.twoArry = { x, y }
+            item.disabled = false;   // 还原所有的disabled 状态
         })
         this.setData({cardData})
     },
